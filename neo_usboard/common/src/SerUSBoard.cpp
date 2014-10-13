@@ -168,7 +168,7 @@ bool SerUSBoard::initPltf()
 {
 	int iRet;
 	m_SerIO.setBaudRate(RS232_BAUDRATE);
-	m_SerIO.setDeviceName("/dev/ttyUSB0");   // m_SerIO.setDeviceName(m_sNumComPort.c_str());
+	m_SerIO.setDeviceName("/dev/ttyUSB2");   // m_SerIO.setDeviceName(m_sNumComPort.c_str());
 	m_SerIO.setBufferSize(RS232_RX_BUFFERSIZE, RS232_TX_BUFFERSIZE);
 	m_SerIO.setTimeout(RS232_TIMEOUT);
 	iRet = m_SerIO.openIO();
@@ -310,7 +310,7 @@ int SerUSBoard::sendCmd()
 			int iNrBytesWritten;
 			unsigned char cMsg[m_iNumBytesSend];
 
-			//m_Mutex.lock();
+		//	m_Mutex.lock();
 
 			convDataToSendMsg(cMsg);
 
@@ -327,20 +327,12 @@ int SerUSBoard::sendCmd()
 				log_to_file(1, cMsg); //direction 1 = transmitted; 2 = recived
 			}
 
-			//m_Mutex.unlock();
+		//	m_Mutex.unlock();
 			return errorFlag;
 
 };
 
-//-----------------------------------------------
-/*
-int SerUSBoard::getTransModeData()
-{
- if(m_iCmdUSBoard == CMD_READ_PARASET && m_iReadAnsFormat == 1 ) return m_iTransMode;
- else return SEND_ON_REQ;
 
-}
-*/
 //-----------------------------------------------
 
 int SerUSBoard::getSensorData1To4(int *iSensorDistMM)
@@ -457,7 +449,7 @@ void SerUSBoard::log_to_file(int direction, unsigned char cMsg[])
 	//Write Data to Logfile
 	if(direction == 1)
 	{
-		fprintf (pFile, "\n\n Direction: %i", direction);
+		fprintf (pFile, "\n\n Direction2: %i", direction);
 		for(int i=0; i<NUM_BYTE_SEND_USBOARD_08; i++)
 			fprintf(pFile," %.2x", cMsg[i]);
 		fprintf(pFile,"\n");
@@ -465,7 +457,7 @@ void SerUSBoard::log_to_file(int direction, unsigned char cMsg[])
 	}
 	if(direction == 2)
 	{
-		fprintf (pFile, "\n\n Direction: %i", direction);
+		fprintf (pFile, "\n\n Direction2: %i", direction);
 		for(int i=0; i<NUM_BYTE_REC_USBOARD_11; i++)
 			fprintf(pFile," %.2x", cMsg[i]);
 		fprintf(pFile,"\n");
@@ -579,23 +571,22 @@ bool SerUSBoard::convRecMsgToData(unsigned char cMsg[])
 {
 	unsigned int iNumByteRec = NUM_BYTE_REC;
 
-
 		int i;
 		unsigned int iTxCheckSum;
 		unsigned int iCheckSum;
 
-		//m_Mutex.lock();
+	//	m_Mutex.lock();
 
 		// test checksum
 		iCheckSum = getCheckSum(cMsg, iNumByteRec);
 
-		iTxCheckSum = ((unsigned int)(cMsg[iNumByteRec]<<8))|(unsigned int)(cMsg[iNumByteRec+1]);
+		iTxCheckSum = (cMsg[iNumByteRec]<<8)|(cMsg[iNumByteRec+1]);
 
 		if(iCheckSum != iTxCheckSum)
 		{
 			return false;
 		}
-
+		
 		// convert data
 		int iCnt = 0;
 
@@ -604,9 +595,10 @@ bool SerUSBoard::convRecMsgToData(unsigned char cMsg[])
 		if(m_iCmdUSBoard == CMD_CONNECT)
 		{
 
-			for(i=0; i<7 ; i++)
+			for(i=0; i<8; i++)
 			{
-				m_iCmdConnectAns[i]= cMsg[iCnt++];
+				iCnt+=1;
+				m_iCmdConnectAns[i]= cMsg[iCnt];
 			}
 			return true;
 		}
@@ -625,14 +617,16 @@ bool SerUSBoard::convRecMsgToData(unsigned char cMsg[])
 */
 		if(m_iCmdUSBoard == CMD_GET_DATA_1TO8)
 		{
-
-			m_iReadAnsFormat = cMsg[iCnt++];
+			iCnt+=1;
+			m_iReadAnsFormat = cMsg[iCnt];
 
 			if(m_iReadAnsFormat == 0 )
 			{
 				for(i=0; i<4;i++)
 				{
-					m_iSensorData1To4[i] = cMsg[iCnt++];
+					iCnt+=1;
+					m_iSensorData1To4[i] = cMsg[iCnt];
+
 				}
 				//m_iSensorAcc1To4 = cMsg[iCnt++];
 				//m_iSensorStatus1To4 = cMsg[iCnt++];
@@ -643,7 +637,9 @@ bool SerUSBoard::convRecMsgToData(unsigned char cMsg[])
 			{
 				for(i=0; i<4;i++)
 				{
-					m_iSensorData5To8[i] = cMsg[iCnt++];
+					iCnt+=1;
+					m_iSensorData5To8[i] = cMsg[iCnt];
+
 				}
 				//m_iSensorAcc5To8 = cMsg[iCnt++];
 				//m_iSensorStatus5To8 = cMsg[iCnt++];
@@ -654,14 +650,15 @@ bool SerUSBoard::convRecMsgToData(unsigned char cMsg[])
 
 		if(m_iCmdUSBoard == CMD_GET_DATA_9TO16)
 		{
-
-			m_iReadAnsFormat = cMsg[iCnt++];
+			iCnt+=1;
+			m_iReadAnsFormat = cMsg[iCnt];
 
 			if(m_iReadAnsFormat == 0 )
 			{
 		    	for(i=0; i<4;i++)
 				{
-					m_iSensorData9To12[i] = cMsg[iCnt++];
+		    		iCnt+=1;
+					m_iSensorData9To12[i] = cMsg[iCnt];
 				}
 				//m_iSensorAcc9To12 = cMsg[iCnt++];
 				//m_iSensorStatus9To12 = cMsg[iCnt++];
@@ -672,6 +669,7 @@ bool SerUSBoard::convRecMsgToData(unsigned char cMsg[])
 			{
 				for(i=0; i<4;i++)
 				{
+					iCnt+=1;
 					m_iSensorData13To16[i] = cMsg[iCnt++];
 				}
 				//m_iSensorAcc13To16 = cMsg[iCnt++];
@@ -682,20 +680,20 @@ bool SerUSBoard::convRecMsgToData(unsigned char cMsg[])
 
 		if(m_iCmdUSBoard == CMD_GET_ANALOGIN)
 		{
-			cMsg[iCnt++];
+
 			for(i=0; i<4; i++)
 			{
-
-				m_iAnalogInDataCh1To4LowByte[i] = cMsg[iCnt++];
+				iCnt+=1;
+				m_iAnalogInDataCh1To4LowByte[i] = cMsg[iCnt];
 			}
-			    m_iAnalogInDataCh1To4HighBits[0] = cMsg[iCnt++];
-			    m_iAnalogInDataCh1To4HighBits[1] = cMsg[iCnt++];
+			    m_iAnalogInDataCh1To4HighBits[0] = cMsg[iCnt+1];
+			    m_iAnalogInDataCh1To4HighBits[1] = cMsg[iCnt+2];
 
 			    return true;
 		}
 
 
-	    //m_Mutex.unlock();
+	   // m_Mutex.unlock();
 
 			if( iCnt >= NUM_BYTE_REC_MAX )
 			{
@@ -769,4 +767,15 @@ void SerUSBoard::USBoardConfig (int CAN_BAUD_RATE,long CAN_ADD, int CAN_EXT_ID, 
 	m_iBOARD_ID = BOARD_ID;
 }
 
+
+//-----------------------------------------------
+
+int SerUSBoard::getTransModeData()
+{
+ if(m_iCmdUSBoard == CMD_READ_PARASET && m_iReadAnsFormat == 1 ) return m_iTransMode;
+ else return SEND_ON_REQ;
+
+}
+
+//-----------------------------------------------
 */
