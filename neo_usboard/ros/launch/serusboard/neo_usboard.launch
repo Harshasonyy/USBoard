@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+     
+     <!-- upload parameters -->
+     <rosparam command="load" ns="USboard" file="$(find neo_base_mp_400)/ros/launch/serusboard/$(env ROBOT).yaml"/>
+     
+     <!-- start usboard node -->
+     <node pkg="neo_usboard" type="neo_usboard_node" ns="USboard" name="usboard_node" respawn="false" output="screen"/>
+
+</launch>
