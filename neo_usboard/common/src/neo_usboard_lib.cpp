@@ -13,7 +13,7 @@ int neo_usboard_node::init()
 		ROS_INFO("Loaded ComPort parameter from parameter server: %s",sComPort.c_str());
 	}
 
-	n.param("message_timeout", usboard_timeout_, 2.0);
+	n.param("message_timeout", usboard_timeout_, 0.5);
 	n.param("requestRate", requestRate, 25.0);
 
 	m_SerUSBoard = new SerUSBoard();
