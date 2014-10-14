@@ -335,7 +335,7 @@ int SerUSBoard::sendCmd()
 
 //-----------------------------------------------
 
-int SerUSBoard::getSensorData1To4(int *iSensorDistMM)
+int SerUSBoard::getSensorData1To4(int *iSensorDistCM)
 {
 	int i;
 	int iSensorState;
@@ -343,7 +343,7 @@ int SerUSBoard::getSensorData1To4(int *iSensorDistMM)
 
 		for(i = 0; i < 4; i++)
 		{
-			iSensorDistMM[i] =  10*m_iSensorData1To4[i];
+			iSensorDistCM[i] = m_iSensorData1To4[i];
 		}
 		//iSensorState = m_iSensorStatus1To4;
 
@@ -353,7 +353,7 @@ int SerUSBoard::getSensorData1To4(int *iSensorDistMM)
 }
 
 
-int SerUSBoard::getSensorData5To8(int *iSensorDistMM)
+int SerUSBoard::getSensorData5To8(int *iSensorDistCM)
 {
 	int i;
 	int iSensorState;
@@ -361,7 +361,7 @@ int SerUSBoard::getSensorData5To8(int *iSensorDistMM)
 
 		for(i = 0; i < 4; i++)
 		{
-			iSensorDistMM[i] =  10*m_iSensorData5To8[i];
+			iSensorDistCM[i] = m_iSensorData5To8[i];
 		}
 		//iSensorState = m_iSensorStatus5To8;
 
@@ -370,7 +370,7 @@ int SerUSBoard::getSensorData5To8(int *iSensorDistMM)
 		return 0;
 }
 
-int SerUSBoard::getSensorData9To12(int *iSensorDistMM)
+int SerUSBoard::getSensorData9To12(int *iSensorDistCM)
 {
 	int i;
 	int iSensorState;
@@ -378,7 +378,7 @@ int SerUSBoard::getSensorData9To12(int *iSensorDistMM)
 
 		for(i = 0; i < 4; i++)
 		{
-			iSensorDistMM[i] = 10*m_iSensorData9To12[i];
+			iSensorDistCM[i] = m_iSensorData9To12[i];
 		}
 		//iSensorState = m_iSensorStatus9To12;
 
@@ -387,7 +387,7 @@ int SerUSBoard::getSensorData9To12(int *iSensorDistMM)
 		return 0;
 }
 
-int SerUSBoard::getSensorData13To16(int *iSensorDistMM)
+int SerUSBoard::getSensorData13To16(int *iSensorDistCM)
 {
 	int i;
 	int iSensorState;
@@ -395,7 +395,7 @@ int SerUSBoard::getSensorData13To16(int *iSensorDistMM)
 
 		for(i = 0; i < 4; i++)
 		{
-			iSensorDistMM[i] = 10*m_iSensorData13To16[i];
+			iSensorDistCM[i] = m_iSensorData13To16[i];
 		}
 		//iSensorState = m_iSensorStatus13To16;
 
@@ -404,7 +404,7 @@ int SerUSBoard::getSensorData13To16(int *iSensorDistMM)
 		return 0;
 }
 
-int SerUSBoard::getAnalogInCh1To4Data(int *iAnalogInCh1To4LowByte)
+int SerUSBoard::getAnalogInCh1To4Data(int *iAnalogInCh1To4Data)
 {
 	int i;
 	int iAnalogInCh1To4HighBits[4];
@@ -417,7 +417,7 @@ int SerUSBoard::getAnalogInCh1To4Data(int *iAnalogInCh1To4LowByte)
 
 	for(i = 0; i < 4; i++)
 		{
-			iAnalogInCh1To4LowByte[i] = (iAnalogInCh1To4HighBits[i] << 8) | m_iAnalogInDataCh1To4LowByte[i];
+			iAnalogInCh1To4Data[i] = (iAnalogInCh1To4HighBits[i] << 8) | m_iAnalogInDataCh1To4LowByte[i];
 		}
 
 		//m_Mutex.unlock();
@@ -503,7 +503,7 @@ void SerUSBoard::convDataToSendMsg(unsigned char cMsg[])
 			 do
 			 {
 			   cMsg[iCnt++] = 0;
-		     }
+		         }
 			 while(iCnt < (m_iNumBytesSend - 1));
 		   }
 	 if(m_iCmdUSBoard == CMD_GET_DATA_9TO16)
