@@ -221,7 +221,7 @@ void neo_usboard_node::readUSBoard()
 		for(int i=0; i<4; i++) usBoard.analog[i] = usAnalog[i];
 
 		topicPub_usBoard.publish(usBoard);
-		ROS_INFO("USBoard Data Published");
+		//ROS_INFO("USBoard Data Published");
 }
 
 
