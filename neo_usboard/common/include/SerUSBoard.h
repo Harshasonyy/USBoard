@@ -58,11 +58,11 @@ public:
 
 		// read received sensor data from buffer
 		int getTransModeData();
-		int getSensorData1To4(int *iSensorDistMM);
-		int getSensorData5To8(int *iSensorDistMM);
-		int getSensorData9To12(int *iSensorDistMM);
-		int getSensorData13To16(int *iSensorDistMM);
-		int getAnalogInCh1To4Data(int *iAnalogInCh1To4LowByte);
+		int getSensorData1To4(int *iSensorDistCM);
+		int getSensorData5To8(int *iSensorDistCM);
+		int getSensorData9To12(int *iSensorDistCM);
+		int getSensorData13To16(int *iSensorDistCM);
+		int getAnalogInCh1To4Data(int *iAnalogInCh1To4Data);
 
 		//Logging
 		void enable_logging();
