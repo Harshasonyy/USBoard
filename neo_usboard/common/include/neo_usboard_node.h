@@ -30,9 +30,9 @@ class neo_usboard_node
 	       neo_usboard_node()
 			  {
 		            usboard_available = false;
-					usboard_online = false;
-					usboard_timeout_ = 2.0;
-					//usboard_transmission_mode = SerUSBoard::SEND_ON_REQ;
+			    usboard_online = false;
+			    usboard_timeout_ = 2.0;
+			    //usboard_transmission_mode = SerUSBoard::SEND_ON_REQ;
 			  }
 
 	       ~neo_usboard_node()
