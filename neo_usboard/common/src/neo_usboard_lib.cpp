@@ -17,7 +17,7 @@ int neo_usboard_node::init()
 	n.param("requestRate", requestRate, 25.0);
 
 	m_SerUSBoard = new SerUSBoard();
-        readParameters();
+        readParameter();
 
 	m_SerUSBoard->init();
 
@@ -44,7 +44,7 @@ int neo_usboard_node::init()
 
 //--------------------------------------------------------------------------------
 
-void neo_usboard_node::readParameters()
+void neo_usboard_node::readParameter()
 {
 	std::string sNumComPort;
 	n.getParam("ComPort", sNumComPort);
