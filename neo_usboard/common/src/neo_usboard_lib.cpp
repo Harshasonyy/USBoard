@@ -17,10 +17,7 @@ int neo_usboard_node::init()
 	n.param("requestRate", requestRate, 25.0);
 
 	m_SerUSBoard = new SerUSBoard();
-	std::string sNumComPort;
-
-	n.getParam("ComPort", sNumComPort);
-        m_SerUSBoard->SetPortConfig(sNumComPort.c_str());
+        readParameters();
 
 	m_SerUSBoard->init();
 
@@ -44,6 +41,16 @@ int neo_usboard_node::init()
    return 0;
 }
 
+
+//--------------------------------------------------------------------------------
+
+void neo_usboard_node::readParameters()
+{
+	std::string sNumComPort;
+	n.getParam("ComPort", sNumComPort);
+	m_SerUSBoard->SetPortConfig(sNumComPort);
+
+}
 //--------------------------------------------------------------------------------
 
 double neo_usboard_node::getRequestRate()
