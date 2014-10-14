@@ -46,14 +46,15 @@ class neo_usboard_node
 
 
 	       int init();
-	       int requestBoardParam();
-	       int requestTransMode();
-           int requestBoardStatus();
+	       //int requestBoardParam();
+	       //int requestTransMode();
+               int requestBoardStatus();
 	       int requestActivateChannels();
 	       int requestSensorReadings1TO8();
 	       int requestSensorReadings9TO16();
 	       int requestAnalogreadings();
-
+               
+               void readParameter();
 	       double getRequestRate();
 
 
