@@ -65,7 +65,7 @@ int neo_usboard_node::requestBoardStatus() {
 	int ret;
 	// Request Status of USBoard
 	ret = m_SerUSBoard->sendCmdConnect();
-	ros::Duration(0.5).sleep();
+	ros::Duration(0.5).sleep();  // send command interval time 0.5 sec
 
 	if(ret != SerUSBoard::NO_ERROR) {
 		ROS_ERROR("Error in sending message to USboard over SerialIO, lost bytes during writing");
@@ -113,7 +113,7 @@ int neo_usboard_node::requestSensorReadings1TO8()
 	int ret;
 	//Request Sensor 1 to 8 readings
 	ret = m_SerUSBoard->sendCmdGetData1To8();
-	ros::Duration(0.5).sleep();
+	ros::Duration(0.5).sleep(); // send command interval time 0.5 sec
 
 	if(ret != SerUSBoard::NO_ERROR) {
 		ROS_ERROR("Error in sending message to USboard over SerialIO, lost bytes during writing");
@@ -147,7 +147,7 @@ int neo_usboard_node::requestSensorReadings9TO16()
 	int ret;
 	//Request Sensor 9 to 16 readings
 	ret = m_SerUSBoard->sendCmdGetData9To16();
-	ros::Duration(0.5).sleep();
+	ros::Duration(0.5).sleep(); // send command interval time 0.5 sec
 
 	if(ret != SerUSBoard::NO_ERROR) {
 		ROS_ERROR("Error in sending message to USboard over SerialIO, lost bytes during writing");
@@ -180,7 +180,7 @@ int neo_usboard_node::requestAnalogreadings()
 	int ret;
 	//Request Analog readings
 	ret = m_SerUSBoard->sendCmdGetAnalogIn();
-	ros::Duration(0.5).sleep();
+	ros::Duration(0.5).sleep(); // send command interval time 0.5 sec
 
 	if(ret != SerUSBoard::NO_ERROR) {
 		ROS_ERROR("Error in sending message to USboard over SerialIO, lost bytes during writing");
