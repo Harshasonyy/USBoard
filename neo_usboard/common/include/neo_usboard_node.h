@@ -6,7 +6,7 @@
 // ROS message includes
 
 #include <std_msgs/Bool.h>
-#include <neo_msgs/USBoard.h>
+#include <neo_msg/USBoard.h>
 
 // ROS service includes
 //--
