@@ -168,7 +168,7 @@ bool SerUSBoard::initPltf()
 {
 	int iRet;
 	m_SerIO.setBaudRate(RS232_BAUDRATE);
-	m_SerIO.setDeviceName("/dev/ttyUSB0");   // m_SerIO.setDeviceName(m_sNumComPort.c_str());
+	m_SerIO.setDeviceName(m_sNumComPort.c_str());  // m_SerIO.setDeviceName("/dev/ttyUSB0"); 
 	m_SerIO.setBufferSize(RS232_RX_BUFFERSIZE, RS232_TX_BUFFERSIZE);
 	m_SerIO.setTimeout(RS232_TIMEOUT);
 	iRet = m_SerIO.openIO();
