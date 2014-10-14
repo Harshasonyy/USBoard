@@ -1,0 +1,6 @@
+#Parameters for USboard
+#Device on which usboard is attached
+ComPort: /dev/ttyUSB0
+relayboard_timeout: 2.0
+requestRate: 25
+log: true
