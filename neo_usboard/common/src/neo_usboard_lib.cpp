@@ -20,7 +20,7 @@ int neo_usboard_node::init()
 	std::string sNumComPort;
 
 	n.getParam("ComPort", sNumComPort);
-    m_SerUSBoard->SetPortConfig(sNumComPort.c_str());
+        m_SerUSBoard->SetPortConfig(sNumComPort.c_str());
 
 	m_SerUSBoard->init();
 
@@ -206,7 +206,7 @@ void neo_usboard_node::readUSBoard()
 		if(!usboard_available == 1) return;
 
 		int usSensors[4];
-        int usAnalog[4];
+                int usAnalog[4];
 		neo_msgs::USBoard usBoard;
 
 		m_SerUSBoard->getSensorData1To4(usSensors);
