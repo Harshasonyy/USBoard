@@ -23,7 +23,7 @@ int neo_usboard_node::init()
 
 	ROS_INFO("Opened USboard at ComPort = %s", sComPort.c_str());
 
-	topicPub_usBoard = n.advertise<neo_msgs::USBoard>("/srb_us_measurements",1);
+	topicPub_usBoard = n.advertise<neo_msg::USBoard>("/srb_us_measurements",1);
 
 	//log
 	n.getParam("log", log);
@@ -215,7 +215,7 @@ void neo_usboard_node::readUSBoard()
 
 		int usSensors[4];
                 int usAnalog[4];
-		neo_msgs::USBoard usBoard;
+		neo_msg::USBoard usBoard;
 
 		m_SerUSBoard->getSensorData1To4(usSensors);
 		for(int i=0; i<4; i++) usBoard.sensor[i] = usSensors[i];
