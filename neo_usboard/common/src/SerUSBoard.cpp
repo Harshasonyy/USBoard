@@ -168,7 +168,7 @@ bool SerUSBoard::initPltf()
 {
 	int iRet;
 	m_SerIO.setBaudRate(RS232_BAUDRATE);
-	m_SerIO.setDeviceName("/dev/ttyUSB2");   // m_SerIO.setDeviceName(m_sNumComPort.c_str());
+	m_SerIO.setDeviceName("/dev/ttyUSB0");   // m_SerIO.setDeviceName(m_sNumComPort.c_str());
 	m_SerIO.setBufferSize(RS232_RX_BUFFERSIZE, RS232_TX_BUFFERSIZE);
 	m_SerIO.setTimeout(RS232_TIMEOUT);
 	iRet = m_SerIO.openIO();
@@ -449,7 +449,7 @@ void SerUSBoard::log_to_file(int direction, unsigned char cMsg[])
 	//Write Data to Logfile
 	if(direction == 1)
 	{
-		fprintf (pFile, "\n\n Direction2: %i", direction);
+		fprintf (pFile, "\n\n Direction: %i", direction);
 		for(int i=0; i<NUM_BYTE_SEND_USBOARD_08; i++)
 			fprintf(pFile," %.2x", cMsg[i]);
 		fprintf(pFile,"\n");
@@ -457,7 +457,7 @@ void SerUSBoard::log_to_file(int direction, unsigned char cMsg[])
 	}
 	if(direction == 2)
 	{
-		fprintf (pFile, "\n\n Direction2: %i", direction);
+		fprintf (pFile, "\n\n Direction: %i", direction);
 		for(int i=0; i<NUM_BYTE_REC_USBOARD_11; i++)
 			fprintf(pFile," %.2x", cMsg[i]);
 		fprintf(pFile,"\n");
@@ -479,7 +479,7 @@ void SerUSBoard::convDataToSendMsg(unsigned char cMsg[])
 		 do
 		 {
 		   cMsg[iCnt++] = 0;
-	     }
+	         }
 		 while(iCnt < (m_iNumBytesSend - 1));
 	   }
 
@@ -492,7 +492,7 @@ void SerUSBoard::convDataToSendMsg(unsigned char cMsg[])
 			 do
 			 {
 			   cMsg[iCnt++] = 0;
-		     }
+		         }
 			 while(iCnt < m_iNumBytesSend-1);
 		   }
 
@@ -512,7 +512,7 @@ void SerUSBoard::convDataToSendMsg(unsigned char cMsg[])
 			 do
 			 {
 			   cMsg[iCnt++] = 0;
-		     }
+		         }
 			 while(iCnt < (m_iNumBytesSend -1));
 		   }
 	 if(m_iCmdUSBoard == CMD_GET_ANALOGIN)
@@ -521,7 +521,7 @@ void SerUSBoard::convDataToSendMsg(unsigned char cMsg[])
 			 do
 			 {
 			   cMsg[iCnt++] = 0;
-		     }
+		         }
 			 while(iCnt < (m_iNumBytesSend - 1));
 		   }
 /*
