@@ -6,7 +6,7 @@ USBoard
 ROS Indigo with catkin Ubuntu 14.04
 
 
-1. Clone the repository into your catkin workspace 
+1. Clone the repository into your catkin workspace src folder
 2. build the package using catkin_make ( $ catkin_make --pkg neo_usboard)
 3. check the /ttyUSB port in which the USBoard connected to PC via RS-232 (genrally /dev/ttyUSB0, update in usboard_param.yaml file if other)
 4. run the roslaunch file ( $ roslaunch neo_usboard neo_usboard.launch)
