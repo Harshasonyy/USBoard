@@ -13,15 +13,16 @@ int main(int argc, char** argv)
 
 	node.requestBoardStatus();
 	node.requestActivateChannels();
-    while(node.n.ok())
-     {
-       node.requestSensorReadings1TO8();
-       node.requestSensorReadings9TO16();
-       node.requestAnalogreadings();
-       node.readUSBoard();
-	   ros::spinOnce();
-	   r.sleep();
-     }
+        
+        while(node.n.ok())
+        {
+          node.requestSensorReadings1TO8();
+          node.requestSensorReadings9TO16();
+          node.requestAnalogreadings();
+          node.readUSBoard();
+	  ros::spinOnce();
+	  r.sleep();
+        }
 
 	return 0;
 
