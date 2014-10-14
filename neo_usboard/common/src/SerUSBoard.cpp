@@ -2,7 +2,7 @@
  * SerUSBoard.cpp
  *
  *  Created on: Sep 15, 2014
- *      Author: neobotix
+ *      Author: Punith Mallesha
  */
 
 /*********************************************************************
