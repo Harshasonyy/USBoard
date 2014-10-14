@@ -606,11 +606,12 @@ bool SerUSBoard::convRecMsgToData(unsigned char cMsg[])
 /*
 		if(m_iCmdUSBoard == CMD_READ_PARASET)
 		{
-
-			m_iReadAnsFormat = cMsg[iCnt++];
+                        iCnt+=1;
+			m_iReadAnsFormat = cMsg[iCnt];
 			if(m_iReadAnsFormat == 1)
 			{
-				m_iTransMode = cMsg[iCnt++];
+			        iCnt+=1;
+				m_iTransMode = cMsg[iCnt];
 				return true;
 			}
 		}
@@ -628,8 +629,8 @@ bool SerUSBoard::convRecMsgToData(unsigned char cMsg[])
 					m_iSensorData1To4[i] = cMsg[iCnt];
 
 				}
-				//m_iSensorAcc1To4 = cMsg[iCnt++];
-				//m_iSensorStatus1To4 = cMsg[iCnt++];
+				//m_iSensorAcc1To4 = cMsg[iCnt+1];
+				//m_iSensorStatus1To4 = cMsg[iCnt+2];
 				return true;
 			}
 
@@ -641,8 +642,8 @@ bool SerUSBoard::convRecMsgToData(unsigned char cMsg[])
 					m_iSensorData5To8[i] = cMsg[iCnt];
 
 				}
-				//m_iSensorAcc5To8 = cMsg[iCnt++];
-				//m_iSensorStatus5To8 = cMsg[iCnt++];
+				//m_iSensorAcc5To8 = cMsg[iCnt+1];
+				//m_iSensorStatus5To8 = cMsg[iCnt+2];
 			    return true;
 			}
 
@@ -657,11 +658,11 @@ bool SerUSBoard::convRecMsgToData(unsigned char cMsg[])
 			{
 		    	for(i=0; i<4;i++)
 				{
-		    		iCnt+=1;
-					m_iSensorData9To12[i] = cMsg[iCnt];
+		    		     iCnt+=1;
+				     m_iSensorData9To12[i] = cMsg[iCnt];
 				}
-				//m_iSensorAcc9To12 = cMsg[iCnt++];
-				//m_iSensorStatus9To12 = cMsg[iCnt++];
+				//m_iSensorAcc9To12 = cMsg[iCnt+1];
+				//m_iSensorStatus9To12 = cMsg[iCnt+2];
 			    return true;
 			}
 
@@ -670,10 +671,10 @@ bool SerUSBoard::convRecMsgToData(unsigned char cMsg[])
 				for(i=0; i<4;i++)
 				{
 					iCnt+=1;
-					m_iSensorData13To16[i] = cMsg[iCnt++];
+					m_iSensorData13To16[i] = cMsg[iCnt];
 				}
-				//m_iSensorAcc13To16 = cMsg[iCnt++];
-				//m_iSensorStatus13To16 = cMsg[iCnt++];
+				//m_iSensorAcc13To16 = cMsg[iCnt+1];
+				//m_iSensorStatus13To16 = cMsg[iCnt+2];
 			    return true;
 			}
 		 }
