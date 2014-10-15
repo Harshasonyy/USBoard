@@ -1,4 +1,4 @@
-drivers
+Drivers
 =======
 
 USBoard
@@ -6,6 +6,8 @@ USBoard
 ROS Indigo with catkin Ubuntu 14.04
 
 
+Description
+=======
 1. Clone the repository into your catkin workspace src folder ($ git clone https://github.com/punithm/drivers.git)
 2. Check the ttyUSB port in which the USBoard connected to PC via RS-232 or CAN (genrally /dev/ttyUSB0, update in ros/launch/usboard_param.yaml file if any other)
 3. Make sure that neo_msgs package is added to your catkin build path
