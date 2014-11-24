@@ -4,7 +4,7 @@
   <version>0.1.2</version>
   <description>Communication Node with neo_usboard</description>
 
-  <maintainer email="nieland@neobotix.de">Neobotix</maintainer>
+  <maintainer email="mallesha@neobotix.de">Neobotix</maintainer>
   <license>BSD</license>
   <url type="website">http://www.neobotix-robots.com</url>
   <author>Punith Mallesha</author>
